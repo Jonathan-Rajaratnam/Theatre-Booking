@@ -3,88 +3,74 @@ import java.util.regex.*;
 
 
 public class Validators {
-//    public static void main(String[] args) {
-//        Scanner input = new Scanner(System.in);
-//        System.out.print("Enter email address: ");
-//        String email = input.next();
-//        if (!checkEmail(email)) {
-//            System.out.println("Email is invalid");
-//            main(null);
-//        }
-//    }
-
 
     /**
      * This method checks if the email entered is of the format username@abc.com
      *
      * @return email if the email is valid
      */
-    public String CheckEmail() {//String email) {
-        boolean a;
+    public static String CheckEmail() {//String email) {
+        boolean check;
         Scanner input = new Scanner(System.in);
         System.out.print("Enter email address: ");
         String email = input.next();
+        email = email.toLowerCase();
         String emailCheck = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";
 
         Pattern pattern = Pattern.compile(emailCheck);
-        if (email == null) {
-            System.out.println("Email is invalid");
-            //return false;
-        } else {
-            a = pattern.matcher(email).matches();
-            if (!a) {
-                System.err.println("Email is invalid");
-                System.out.println();
-                CheckEmail();
-            }
+        check = pattern.matcher(email).matches();
+        if (!check) {
+            System.err.println("Email is invalid\n");
+            System.out.println();
+            return CheckEmail();
         }
         return email;
     }
 
-    public String Check_FirstNames() {
+    public static String Check_FirstNames() {
         boolean check;
         Scanner input = new Scanner(System.in);
         System.out.print("Enter first name: ");
-        String f_name = input.nextLine();
+        String f_name = input.next();
+        f_name = CamelCase(f_name);
         String nameCheck = "^[A-Za-z]{2,29}+$";
 
         Pattern pattern = Pattern.compile(nameCheck);
-        if (f_name == null) {
-            System.err.println("Name is invalid");
-            //return false;
-        } else {
-            check = pattern.matcher(f_name).matches();
-            if (!check) {
-                System.err.println("Name is invalid");
-                System.out.println();
-                Check_FirstNames();
-            }
+        check = pattern.matcher(f_name).matches();
+        if (!check) {
+            System.err.println("Name is invalid\n");
+            System.out.println();
+            return Check_FirstNames();
         }
         return f_name;
     }
 
-    public String Check_LastNames() {
+
+    public static String Check_LastNames() {
         boolean check;
         Scanner input = new Scanner(System.in);
         System.out.print("Enter surname: ");
         String surname = input.next();
+        surname = CamelCase(surname);
         String nameCheck = "^[A-Za-z]{2,29}+$";
 
         Pattern pattern = Pattern.compile(nameCheck);
-        if (surname == null) {
-            System.err.println("Surname is invalid");
-            //return false;
-        } else {
-            check = pattern.matcher(surname).matches();
-            if (!check) {
-                System.err.println("Surname is invalid");
-                System.out.println();
-                Check_LastNames();
-            }
+        check = pattern.matcher(surname).matches();
+        if (!check) {
+            System.err.println("Surname is invalid\n");
+            System.out.println();
+            return Check_LastNames();
         }
         return surname;
     }
+
+    public static String CamelCase(String name) {
+        String Letter = name.substring(0, 1).toUpperCase();
+        String rest = name.substring(1).toLowerCase();
+        return Letter + rest;
+    }
 }
+
